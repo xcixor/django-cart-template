@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/product/detail.css' %}" />
+{% load static %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col m4">
+            <img height="250px" width="300px"
+            src="{% if product.image %}{{ product.image.url }}
+                {% else %}
+                https://placebear.com/640/360
+                {% endif %}">
+        </div>
+        <div class="col m8">
+            <h4>{{ product.name }}</h4>
+            <h5><a href="{{ product.category.get_absolute_url }}">
+                {{ product.category }}</a></h5>
+            <p class="price">${{ product.price }}</p>
+            {{ product.description|linebreaks }}
+        </div>
+    </div>
+</div>
+{% endblock %}
