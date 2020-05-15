@@ -1,0 +1,18 @@
+.content {
+    display: flex !important;
+}
+
+.left-content {
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+.order-info {
+    margin-top: 100px;
+    padding: 10px;
+    height: 100%;
+}
+
+ul li{
+    list-style: disc;
+}

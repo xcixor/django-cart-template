@@ -6,6 +6,8 @@ from .application import get_products
 
 
 class Cart(object):
+    """Holds user's shoped items.
+    """
 
     def __init__(self, request):
         """
