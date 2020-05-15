@@ -36,11 +36,11 @@ Your shopping cart
                 <form action="{% url "cart:cart_add" product.id %}" method="post">
                     {{ item.update_quantity_form.quantity }}
                     {{ item.update_quantity_form.update }}
-                    <input type="submit" value="Update">
+                    <button type="submit" class="btn waves-effect">Update</button>
                     {% csrf_token %}
                 </form>
             </td>
-            <td><a href="{% url "cart:cart_remove" product.id %}">Remove</a></td>
+            <td class="center"><a href="{% url "cart:cart_remove" product.id %}"><i class="material-icons red-text tooltipped" data-position="top" data-tooltip="Remove">remove_shopping_cart</i></a></td>
             <td class="num">Ksh. {{ item.price }}</td>
             <td class="num">Ksh. {{ item.total_price }}</td>
             </tr>
