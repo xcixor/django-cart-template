@@ -1,6 +1,6 @@
 """Deals with order queries
 """
-from orders.models import OrderItem
+from orders.models import OrderItem, Order
 
 
 def create_order_item(data_dict):
@@ -11,3 +11,12 @@ def create_order_item(data_dict):
     """
     item = OrderItem(**data_dict)
     item.save()
+
+
+def get_order(order_id):
+    """Fetch an order
+
+    Arguments:
+        order_id {int} -- id of order to fetch
+    """
+    return Order.objects.get(id=order_id)
