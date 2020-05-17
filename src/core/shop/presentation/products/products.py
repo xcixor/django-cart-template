@@ -2,6 +2,7 @@
 """
 from django.shortcuts import render
 from shop.application import get_product_list, get_product_detail
+from cart.forms import CartAddProductForm
 
 
 def product_list(request, category_slug=None):
@@ -30,8 +31,12 @@ def product_detail(request, product_id, slug):
     Returns:
         object -- html content
     """
+    cart_product_form = CartAddProductForm()
     return render(
         request,
         'shop/product/detail.html',
-        {'product': get_product_detail(product_id, slug)}
+        {
+            'product': get_product_detail(product_id, slug),
+            'cart_product_form': cart_product_form
+        }
     )

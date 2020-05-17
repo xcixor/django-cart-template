@@ -10,6 +10,8 @@ autopep8 = "*"
 [packages]
 django = "==2.2.10"
 pillow = "*"
+celery = "==4.4"
+flower = "*"
 
 [requires]
 python_version = "3.8"

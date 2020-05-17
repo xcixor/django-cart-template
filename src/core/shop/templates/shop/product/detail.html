@@ -20,6 +20,15 @@
             <h5><a href="{{ product.category.get_absolute_url }}">
                 {{ product.category }}</a></h5>
             <p class="price">${{ product.price }}</p>
+            <div class="row">
+                <form action="{% url "cart:cart_add" product.id %}" method="post" class="col s12">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn-floating waves-effect center tooltipped green" data-position="top" data-tooltip="Add to cart">
+                        <i class="material-icons orange-text">add_shopping_cart</i>
+                    </button>
+                </form>
+            </div>
             {{ product.description|linebreaks }}
         </div>
     </div>

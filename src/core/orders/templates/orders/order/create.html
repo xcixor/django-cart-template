@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/orders/create.css' %}" />
+{% endblock %}
+{% block title %}
+    Checkout
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row content">
+        <div class="col m8">
+            <h2>Checkout</h2>
+
+            <form action="." method="post" class="order-form">
+            {{ form.as_p }}
+            <button type="submit" class="btn waves-light">Place Order</button>
+            {% csrf_token %}
+            </form>
+        </div>
+        <div class="col m4 left-content">
+            <div class="row">
+                <div class="order-info">
+                    <h4>Your order</h4>
+                    <ul>
+                        {% for item in cart %}
+                        <li>
+                        {{ item.quantity }}x {{ item.product.name }}
+                        <span>${{ item.total_price }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <p>Total: ${{ cart.get_total_price }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
