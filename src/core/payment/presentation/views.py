@@ -8,6 +8,7 @@ from payment.data import get_order
 # investigate how to make this view more secure
 # maybe the nonce token and other tokens should be converted to
 # some encrypted format such as in confirm email token in teke
+# also integrate paypal(dropin ui from braintree) and mpesa
 def payment_process(request):
     """Checkout user order with payment.
 
