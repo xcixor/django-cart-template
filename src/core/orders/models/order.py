@@ -17,6 +17,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    braintree_id = models.CharField(max_length=150, blank=True)
 
     class Meta:
         ordering = ('-created',)
@@ -25,6 +26,11 @@ class Order(models.Model):
         return 'Order {}'.format(self.id)
 
     def get_total_cost(self):
+        """Calculate the total coast of the order
+
+        Returns:
+            int -- total cost of the order
+        """
         return sum(item.get_cost() for item in self.items.all())
 
 
@@ -46,4 +52,9 @@ class OrderItem(models.Model):
         return '{}'.format(self.id)
 
     def get_cost(self):
+        """Calculate the cost of the item
+
+        Returns:
+            int -- cost of the item
+        """
         return self.price * self.quantity
