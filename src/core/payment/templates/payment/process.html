@@ -9,8 +9,9 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-    <div class="row">
-        <h1>Pay by credit card</h1>
+<div class="row">
+<div class="col s12 m6 credit-card">
+<h3>Pay by credit card</h3>
 <form action="." id="payment" method="post">
 <label for="card-number">Card Number</label>
 <div id="card-number" class="field"></div>
@@ -20,7 +21,7 @@
 <div id="expiration-date" class="field"></div>
 <input type="hidden" id="nonce" name="payment_method_nonce" value="">
 {% csrf_token %}
-<input type="submit" value="Pay">
+<input type="submit" value="Pay" class="btn">
 </form>
 <!-- Load the required client component. -->
 <script src="https://js.braintreegateway.com/web/3.29.0/js/client.min.js">
@@ -41,7 +42,9 @@ return;
 braintree.hostedFields.create({
 client: clientInstance,
 styles: {
-'input': {'font-size': '13px'},
+'input': {
+    'font-size': '1.2em'
+},
 'input.invalid': {'color': 'red'},
 'input.valid': {'color': 'green'}
 },
@@ -72,6 +75,7 @@ document.getElementById('payment').submit();
 });
 });
 </script>
-    </div>
+</div>
+</div>
 </div>
 {% endblock %}
