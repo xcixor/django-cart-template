@@ -1,6 +1,10 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+import weasyprint
 from orders.forms import OrderCreateForm
 from cart.cart import Cart
 from orders.data import create_order_item, get_order
@@ -60,3 +64,26 @@ def admin_order_detail(request, order_id):
     return render(request,
                   'admin/orders/order/detail.html',
                   {'order': order})
+
+
+@staff_member_required
+def admin_order_pdf(request, order_id):
+    """Generates a pdf invoice for existing order
+
+    Arguments:
+        request {object} -- django http request object
+        order_id {int} -- id of order to print
+
+    Returns:
+        object -- http response
+    """
+    order = get_order(order_id)
+    html = render_to_string('orders/order/pdf.html', {'order': order})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="order_{}.pdf"'.\
+        format(order.id)
+    weasyprint.HTML(string=html).write_pdf(
+        response,
+        stylesheets=[weasyprint.CSS(settings.STATIC_ROOT +
+                                    'css/orders/pdf.css')])
+    return response
