@@ -1,8 +1,9 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from orders.forms import OrderCreateForm
 from cart.cart import Cart
-from orders.data import create_order_item
+from orders.data import create_order_item, get_order
 from orders.task import order_created
 
 
@@ -42,3 +43,20 @@ def order_create(request):
         form = OrderCreateForm()
         return render(request, 'orders/order/create.html',
                       {'cart': cart, 'form': form})
+
+
+@staff_member_required
+def admin_order_detail(request, order_id):
+    """Custom admin view to display information about an order
+
+    Arguments:
+        request {object} -- django request object (http)
+        order_id {int} -- id of order to display
+
+    Returns:
+        object -- django http response
+    """
+    order = get_order(order_id)
+    return render(request,
+                  'admin/orders/order/detail.html',
+                  {'order': order})
