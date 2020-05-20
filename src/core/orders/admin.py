@@ -66,6 +66,22 @@ def order_detail(obj):
                                      args=[obj.id])))
 
 
+def order_pdf(obj):
+    """Adds a link to generate pdf.
+
+    Arguments:
+        obj {object} -- order to print
+
+    Returns:
+        url -- string representation of object's pdf content
+    """
+    return mark_safe('<a href="{}">PDF</a>'.format(
+        reverse('orders:admin_order_pdf', args=[obj.id])))
+
+
+order_pdf.short_description = 'Invoice'
+
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     """Manages orders.
@@ -73,7 +89,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = [
         'id', 'first_name', 'last_name', 'email',
         'address', 'postal_code', 'city', 'paid',
-        'created', 'updated', order_detail
+        'created', 'updated', order_detail, order_pdf
         ]
     list_filter = ['paid', 'created', 'updated']
     inlines = [OrderItemInline]

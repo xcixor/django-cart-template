@@ -1,0 +1,25 @@
+body {
+    background-color: whitesmoke;
+}
+
+#paid {
+    border-color: #4caf50;
+}
+
+#pending {
+    border-color: #e53935;
+}
+
+table {
+    margin-bottom: 30px;
+}
+
+.bordered{
+    margin-top: 30px !important;
+    border-style:solid;
+    border-width:5px;
+    padding: 10px;
+    -ms-transform: rotate(-20deg); /* IE 9 */
+    transform: rotate(-20deg);
+    display: inline-block;
+}
