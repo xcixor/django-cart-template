@@ -27,6 +27,9 @@ urlpatterns = [
         'payment/',
         include('payment.presentation.urls', namespace='payment')
     ),
+    path(
+        'coupons/',
+        include('coupons.presentation.urls', namespace='coupons')),
     path('', include('shop.presentation.urls', namespace='shop')),
 ]
 
